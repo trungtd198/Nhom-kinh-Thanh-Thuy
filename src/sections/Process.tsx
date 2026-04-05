@@ -59,7 +59,7 @@ const Process = () => {
             {steps.map((step, index) => (
               <div key={step.number} className="relative text-center">
                 {/* Step circle */}
-                <div className="relative mx-auto mb-6 size-16">
+                <div className="relative z-20 mx-auto mb-6 size-16">
                   <div className="relative z-10 flex size-16 items-center justify-center rounded-full bg-cta-gradient text-2xl shadow-lg shadow-primary-900/50">
                     {step.icon}
                   </div>
@@ -69,7 +69,7 @@ const Process = () => {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-dark-600 bg-dark-700 p-6 transition-colors hover:border-primary-700">
+                <div className="relative z-10 rounded-2xl border border-dark-600 bg-dark-700 p-6 transition-colors hover:border-primary-700">
                   {/* Duration badge */}
                   <span className="mb-3 inline-block rounded-full bg-primary-900/50 px-2.5 py-1 text-xs text-primary-400">
                     ⏱ {step.duration}

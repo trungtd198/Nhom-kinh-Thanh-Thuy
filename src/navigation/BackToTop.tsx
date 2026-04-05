@@ -29,12 +29,12 @@ const BackToTop = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-36 right-6 z-50">
+    <div className="fixed bottom-28 right-4 z-50 md:bottom-36 md:right-6">
       {isVisible && (
         <button
           type="button"
           onClick={scrollToTop}
-          className="flex size-12 items-center justify-center rounded-full bg-primary-500 text-white shadow-lg transition-all duration-300 hover:bg-primary-600 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:scale-95"
+          className="flex size-10 items-center justify-center rounded-full bg-primary-500 text-white shadow-lg transition-all duration-300 hover:bg-primary-600 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:scale-95 md:size-12"
           aria-label="Back to top"
         >
           <svg
