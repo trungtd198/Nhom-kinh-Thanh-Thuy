@@ -5,9 +5,9 @@ export const faqs = [
       'Có. Đội kỹ thuật khảo sát hiện trạng, tư vấn cấu hình vật tư và gửi báo giá rõ từng hạng mục.',
   },
   {
-    question: 'Website có thể chỉnh sửa nội dung ở đâu?',
+    question: 'Thời gian thi công thường mất bao lâu?',
     answer:
-      'Nội dung chính nằm trong thư mục src/data và src/config, gồm sản phẩm, dự án, bài viết, hotline, địa chỉ và thông tin thương hiệu.',
+      'Thông thường từ 3 đến 15 ngày tùy số lượng, mẫu mã, màu sắc và mức độ phức tạp của công trình.',
   },
   {
     question: 'Có hỗ trợ bản vẽ kỹ thuật trước thi công không?',

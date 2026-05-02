@@ -13,7 +13,6 @@ export const ProductsSection = () => (
         <SectionTitle
           eyebrow="Danh mục sản phẩm"
           title="Hệ nhôm kính cho công trình cần độ hoàn thiện cao"
-          description="Các nhóm sản phẩm được cấu trúc sẵn để dễ chỉnh sửa nội dung, SEO từng trang và mở rộng danh mục khi cần."
         />
         <Button asChild variant="outline">
           <Link href="/san-pham">Xem tất cả sản phẩm</Link>

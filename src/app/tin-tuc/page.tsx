@@ -22,8 +22,8 @@ const NewsPage = () => (
           Kiến thức vật tư và kinh nghiệm thi công nhôm kính
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-8 text-silver-200">
-          Khu vực nội dung hỗ trợ SEO dài hạn và giúp khách hàng hiểu rõ hơn về
-          cấu hình trước khi quyết định.
+          Chia sẻ kinh nghiệm chọn vật tư, so sánh hệ cửa và hướng dẫn bảo trì
+          giúp bạn ra quyết định đúng cho công trình.
         </p>
       </div>
     </section>
@@ -31,7 +31,7 @@ const NewsPage = () => (
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title="Bài viết mới"
-          description="Dữ liệu bài viết đang nằm trong src/data/posts.ts để đội ngũ có thể cập nhật nhanh."
+          description="Cập nhật kiến thức chọn cửa, kính, phụ kiện và kinh nghiệm thi công từ đội ngũ kỹ thuật."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {posts.map((post) => (

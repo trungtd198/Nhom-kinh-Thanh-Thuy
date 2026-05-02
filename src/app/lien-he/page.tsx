@@ -36,7 +36,7 @@ const ContactPage = () => (
         <div>
           <SectionTitle
             title="Thông tin doanh nghiệp"
-            description="Các thông tin bên dưới có thể chỉnh trong src/config/site.ts."
+            description="Liên hệ trực tiếp để được tư vấn và báo giá nhanh nhất."
           />
           <div className="mt-8 space-y-4">
             <a

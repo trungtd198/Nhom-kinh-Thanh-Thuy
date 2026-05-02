@@ -22,8 +22,8 @@ const ProductsPage = () => (
           Danh mục cửa và kính công trình
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-8 text-silver-200">
-          Cấu trúc sản phẩm hỗ trợ SEO từng trang chi tiết, dễ chỉnh sửa trong
-          thư mục dữ liệu và sẵn sàng mở rộng thêm danh mục.
+          Đa dạng hệ cửa nhôm, cửa cuốn, cửa thép vân gỗ, lan can kính, cửa
+          composite và kính cường lực — tư vấn theo công trình thực tế.
         </p>
       </div>
     </section>
