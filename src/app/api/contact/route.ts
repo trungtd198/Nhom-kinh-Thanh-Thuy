@@ -44,7 +44,6 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
-      console.error('Resend Error:', error);
       return NextResponse.json(
         {
           success: false,
@@ -61,8 +60,7 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 },
     );
-  } catch (error) {
-    console.error('API Contact Error:', error);
+  } catch {
     return NextResponse.json(
       { success: false, message: 'Lỗi hệ thống. Vui lòng thử lại sau.' },
       { status: 500 },

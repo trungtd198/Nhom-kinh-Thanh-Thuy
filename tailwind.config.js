@@ -27,6 +27,20 @@ module.exports = {
           800: '#0b4990',
           900: '#063068',
         },
+        navy: {
+          950: '#06111f',
+          900: '#0a1b30',
+          800: '#102b4a',
+          700: '#153b63',
+          600: '#1c4f82',
+        },
+        champagne: {
+          100: '#fbf4df',
+          200: '#f4e3b5',
+          300: '#e7c878',
+          400: '#d5ad55',
+          500: '#b88d35',
+        },
         dark: {
           900: '#0d1117',
           800: '#161b22',
@@ -71,6 +85,8 @@ module.exports = {
         'fade-in': 'fadeIn 0.6s ease-out',
         'slide-up': 'slideUp 0.5s ease-out',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'accordion-down': 'accordionDown 0.2s ease-out',
+        'accordion-up': 'accordionUp 0.2s ease-out',
       },
       keyframes: {
         fadeIn: {
@@ -80,6 +96,14 @@ module.exports = {
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        accordionDown: {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        accordionUp: {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
     },

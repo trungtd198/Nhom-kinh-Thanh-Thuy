@@ -20,9 +20,9 @@ export async function sendContactEmail({
   if (!companyEmail) {
     throw new Error('COMPANY_EMAIL is not defined in environment variables');
   }
-  console.log(process.env.RESEND_FROM_EMAIL, resend);
+
   return resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev', // Update this with your verified domain in .env.local
+    from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
     to: [companyEmail],
     subject: `[Liên Hệ Mới] - ${name}`,
     html: `
@@ -32,7 +32,7 @@ export async function sendContactEmail({
       <p><strong>Địa chỉ công trình:</strong> ${address || 'Không cung cấp'}</p>
       <p><strong>Nội dung yêu cầu:</strong> ${message || 'Không có nội dung'}</p>
       <br />
-      <p><em>Email này được gửi tự động từ hệ thống Landing Page.</em></p>
+      <p><em>Email này được gửi tự động từ website namthanhwindows.vn.</em></p>
     `,
   });
 }

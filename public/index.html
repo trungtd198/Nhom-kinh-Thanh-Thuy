@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Công Ty TNHH Thương Mại & Xây Dựng Thành Thủy</title>
+  <meta name="description" content="Công Ty TNHH Thương Mại & Xây Dựng Thành Thủy - Giải pháp cửa & nhôm kính cho mọi công trình. Uy tín - Chất lượng - Chuyên nghiệp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --page-width: 794px;   /* A4 width at 96dpi */
+      --page-height: 1123px; /* A4 height at 96dpi */
+      --blue-dark: #0d2a6e;
+      --blue-mid: #1a4bbf;
+      --blue-light: #2e75e8;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 30px 0;
+    }
+
+    /* ========== PAGE WRAPPER ========== */
+    .page {
+      position: relative;
+      width: var(--page-width);
+      height: var(--page-height);
+      overflow: hidden;
+      background: #c8d8ef;
+      box-shadow: 0 10px 60px rgba(0,0,0,0.35);
+    }
+
+    /* ========== BACKGROUND IMAGE ========== */
+    .bg-image {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 68%;
+      height: 63%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 1;
+    }
+
+    /* ========== LIGHT BLUE TOP-LEFT GRADIENT ========== */
+    .bg-top-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 35%;
+      background: linear-gradient(135deg, #deeaf8 0%, #bdd4ef 60%, transparent 100%);
+      z-index: 2;
+    }
+
+    /* ========== DIAGONAL BLUE SHAPE (main content area) ========== */
+    .diagonal-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 72%;
+      z-index: 3;
+      clip-path: polygon(0 18%, 100% 0%, 100% 100%, 0% 100%);
+      background: linear-gradient(160deg, #1145b0 0%, #0a2775 40%, #071d5a 100%);
+    }
+
+    /* ========== OVERLAY FADE on right side of diagonal ========== */
+    .diagonal-bg::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 45%; height: 40%;
+      background: linear-gradient(to bottom-left, rgba(30,80,180,0.6) 0%, transparent 80%);
+    }
+
+    /* ========== HEADER / LOGO AREA ========== */
+    .header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      padding: 32px 38px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--blue-dark);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .brand-tagline {
+      font-size: 10px;
+      font-weight: 500;
+      color: #4a6fa5;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    .main-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      padding: 0 52px 90px 52px;
+      /* sits above .diagonal-bg */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 72%;
+    }
+
+    .company-type {
+      font-size: 22px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 1px;
+      line-height: 1.45;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .company-name {
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: 2px;
+      line-height: 1.0;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+
+    .company-name span {
+      display: block;
+    }
+
+    .slogan {
+      font-size: 18px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 1px;
+      line-height: 1.5;
+      text-transform: uppercase;
+      margin-bottom: 52px;
+    }
+
+    /* ========== BADGES / ICONS ROW ========== */
+    .badges {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .badge-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .badge-divider {
+      width: 1px;
+      height: 60px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .badge-icon {
+      width: 52px;
+      height: 52px;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .badge-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .badge-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ========== PAGE NUMBER ========== */
+    .page-number {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 15;
+      background: #1a4bbf;
+      width: 62px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+      padding-right: 10px;
+    }
+
+    .page-number span {
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 1px;
+    }
+
+    /* ========== PRINT STYLES ========== */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+        margin: 0;
+      }
+      .page {
+        box-shadow: none;
+        width: 210mm;
+        height: 297mm;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page" id="page-1">
+
+    <!-- Light gradient top-left area -->
+    <div class="bg-top-left"></div>
+
+    <!-- Background building image (top-right) -->
+    <img class="bg-image" src="Page1.png" alt="Công trình nhôm kính Thành Thủy" />
+
+    <!-- Dark blue diagonal overlay -->
+    <div class="diagonal-bg"></div>
+
+    <!-- Header / Logo -->
+    <header class="header">
+      <img class="logo-img" src="logo.png" alt="Logo Thành Thủy" />
+      <div class="brand-text">
+        <div class="brand-name">Thành Thủy</div>
+        <div class="brand-tagline">Trao uy tín – Nhận niềm tin</div>
+      </div>
+    </header>
+
+    <!-- Main content block -->
+    <main class="main-content">
+      <div class="company-type">
+        Công ty TNHH<br />Thương mại &amp; Xây dựng
+      </div>
+
+      <div class="company-name">
+        <span>Thành Thủy</span>
+      </div>
+
+      <div class="slogan">
+        Giải pháp cửa &amp; nhôm kính<br />cho mọi công trình
+      </div>
+
+      <!-- Badges row -->
+      <div class="badges">
+
+        <!-- Uy Tín -->
+        <div class="badge-item">
+          <div class="badge-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+          </div>
+          <div class="badge-label">Uy tín</div>
+        </div>
+
+        <div class="badge-divider"></div>
+
+        <!-- Chất Lượng -->
+        <div class="badge-item">
+          <div class="badge-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9" />
+              <polyline points="9 12 11 14 15 10" />
+            </svg>
+          </div>
+          <div class="badge-label">Chất lượng</div>
+        </div>
+
+        <div class="badge-divider"></div>
+
+        <!-- Chuyên Nghiệp -->
+        <div class="badge-item">
+          <div class="badge-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="7" width="18" height="13" rx="2" />
+              <path d="M8 7V5a4 4 0 018 0v2" />
+              <line x1="12" y1="12" x2="12" y2="16" />
+              <circle cx="12" cy="12" r="1" fill="white" />
+            </svg>
+          </div>
+          <div class="badge-label">Chuyên nghiệp</div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Page number -->
+    <div class="page-number">
+      <span>01</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
