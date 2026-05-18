@@ -1,6 +1,5 @@
 import { AnimatedSection } from '@/components/sections/animated-section';
 import { CTASection } from '@/components/sections/cta-section';
-import { GalleryMasonry } from '@/components/sections/gallery-masonry';
 import { HomeHero } from '@/components/sections/home-hero';
 import { ProcessSection } from '@/components/sections/process-section';
 import { ProductsSection } from '@/components/sections/products-section';
@@ -22,9 +21,6 @@ const HomePage = () => (
     </AnimatedSection>
     <AnimatedSection>
       <ProcessSection />
-    </AnimatedSection>
-    <AnimatedSection>
-      <GalleryMasonry />
     </AnimatedSection>
     <AnimatedSection>
       <TestimonialsSection />

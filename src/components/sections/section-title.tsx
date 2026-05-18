@@ -16,11 +16,7 @@ export const SectionTitle = ({
   className,
 }: SectionTitleProps) => (
   <div
-    className={cn(
-      'mx-auto max-w-3xl',
-      align === 'center' && 'text-center',
-      className,
-    )}
+    className={cn('max-w-4xl', align === 'center' && 'text-left', className)}
   >
     {eyebrow ? (
       <p className="mb-3 text-sm font-semibold uppercase text-champagne-500">

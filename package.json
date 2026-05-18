@@ -9,6 +9,7 @@
     "build-prod": "run-s clean build",
     "clean": "rimraf .next .swc out",
     "lint": "next lint",
+    "type-check": "tsc --noEmit --pretty",
     "format": "next lint --fix && prettier '**/*.{json,yaml}' --write --ignore-path .gitignore",
     "check-types": "tsc --noEmit --pretty",
     "prepare": "husky install"

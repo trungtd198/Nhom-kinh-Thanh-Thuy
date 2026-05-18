@@ -1,3 +1,22 @@
+import { existsSync, readdirSync } from 'fs';
+import path from 'path';
+
+const PUBLIC_ASSET_PREFIX = '/assets/images/';
+const PUBLIC_IMAGE_DIRECTORY = path.join(
+  process.cwd(),
+  'public',
+  'assets',
+  'images',
+);
+const IMAGE_EXTENSIONS = new Set([
+  '.avif',
+  '.gif',
+  '.jpeg',
+  '.jpg',
+  '.png',
+  '.webp',
+]);
+
 export type Product = {
   slug: string;
   name: string;
@@ -58,6 +77,43 @@ const commonFaqs = (productName: string) => [
   },
 ];
 
+const sortByImageName = (items: string[]) =>
+  [...items].sort((first, second) =>
+    first.localeCompare(second, 'vi', {
+      numeric: true,
+      sensitivity: 'base',
+    }),
+  );
+
+export const getProductModelImages = (modelImage: string) => {
+  if (!modelImage.startsWith(PUBLIC_ASSET_PREFIX)) {
+    return [modelImage];
+  }
+
+  const directoryUrl = modelImage.slice(0, modelImage.lastIndexOf('/'));
+  const relativeDirectory = directoryUrl.replace(PUBLIC_ASSET_PREFIX, '');
+  const directoryPath = path.join(
+    PUBLIC_IMAGE_DIRECTORY,
+    ...relativeDirectory.split('/'),
+  );
+
+  if (!existsSync(directoryPath)) {
+    return [modelImage];
+  }
+
+  const images = sortByImageName(
+    readdirSync(directoryPath, { withFileTypes: true })
+      .filter(
+        (entry) =>
+          entry.isFile() &&
+          IMAGE_EXTENSIONS.has(path.extname(entry.name).toLowerCase()),
+      )
+      .map((entry) => `${directoryUrl}/${entry.name}`),
+  );
+
+  return images.length > 0 ? images : [modelImage];
+};
+
 export const products: Product[] = [
   {
     slug: 'cua-nhom',
@@ -69,7 +125,7 @@ export const products: Product[] = [
       'Cửa nhôm cho nhà ở, cửa hàng, văn phòng và công trình dân dụng với nhiều hệ nhôm, màu sắc và kiểu mở.',
     description:
       'Cửa nhôm được tư vấn theo kích thước thực tế, hướng nắng gió và nhu cầu sử dụng. Sản phẩm phù hợp cho cửa đi, cửa sổ, cửa ban công, cửa lùa và các hạng mục nhôm kính đồng bộ.',
-    image: '/assets/images/cua-nhom/cua-mo-quay/cuanhom-1.jpeg',
+    image: '/assets/images/cua-nhom/cua-mo-quay/cua-nhom-1.jpeg',
     overview: {
       description:
         'Cửa nhôm là giải pháp cửa hiện đại cho công trình dân dụng và thương mại, kết hợp thanh nhôm định hình, kính an toàn và phụ kiện đồng bộ để tạo độ kín khít, bền chắc và thẩm mỹ.',
@@ -87,17 +143,17 @@ export const products: Product[] = [
       {
         name: 'Cửa nhôm mở quay',
         type: 'Cửa đi, cửa thông phòng',
-        image: '/assets/images/cua-nhom/cua-mo-quay/cuanhom-1.jpeg',
+        image: '/assets/images/cua-nhom/cua-mo-quay/cua-nhom-1.jpeg',
       },
       {
         name: 'Cửa nhôm mở lùa',
         type: 'Ban công, mặt tiền, không gian hẹp',
-        image: '/assets/images/cua-nhom/cua-mo-quay/cuanhom-1.jpeg',
+        image: '/assets/images/cua-nhom/cua-nhom-mo-lua/cua-lua-1.jpeg',
       },
       {
         name: 'Cửa sổ nhôm kính',
         type: 'Mở quay, mở hất, mở trượt',
-        image: '/assets/images/cua-nhom/cua-mo-quay/cuanhom-1.jpeg',
+        image: '/assets/images/cua-nhom/cua-so-nhom-kinh/cua-so-1.jpeg',
       },
     ],
     highlights: [
@@ -151,7 +207,7 @@ export const products: Product[] = [
       'Cửa cuốn khe thoáng và cửa cuốn tấm liền cho nhà ở, ki-ốt, gara và mặt bằng kinh doanh.',
     description:
       'Cửa cuốn giúp tối ưu an ninh và tiết kiệm diện tích cho mặt tiền. Hệ cửa được tư vấn theo khẩu độ, tần suất đóng mở và yêu cầu vận hành bằng motor hoặc kéo tay.',
-    image: '/assets/images/cua-cuon/cua-cuon-khe-thoang/khe-thoang-1.jpeg',
+    image: '/assets/images/cua-cuon/cua-cuon-khe-thoang/cua-khe-thoang-1.jpeg',
     overview: {
       description:
         'Cửa cuốn là lựa chọn phổ biến cho mặt tiền nhà phố, gara, cửa hàng và kho nhỏ nhờ khả năng đóng mở gọn, bảo vệ tốt và dễ tích hợp motor điều khiển từ xa.',
@@ -169,12 +225,13 @@ export const products: Product[] = [
       {
         name: 'Cửa cuốn khe thoáng',
         type: 'Mặt tiền nhà phố, cửa hàng',
-        image: '/assets/images/cua-cuon/cua-cuon-khe-thoang/khe-thoang-1.jpeg',
+        image:
+          '/assets/images/cua-cuon/cua-cuon-khe-thoang/cua-khe-thoang-1.jpeg',
       },
       {
         name: 'Cửa cuốn tấm liền',
         type: 'Gara, kho nhỏ, công trình dân dụng',
-        image: '/assets/images/cua-cuon/cua-cuon-khe-thoang/khe-thoang-2.jpeg',
+        image: '/assets/images/cua-cuon/cua-cuon-tam-lien/cua-tam-lien-1.jpg',
       },
     ],
     highlights: [
@@ -258,7 +315,7 @@ export const products: Product[] = [
       {
         name: 'Cửa sổ',
         type: 'Thông gió, lấy sáng',
-        image: '/assets/images/cua-van-go/cua-so/cua-so-1.jpg',
+        image: '/assets/images/cua-van-go/cua-so/cua-so-1.jpeg',
       },
     ],
     highlights: [
@@ -313,7 +370,7 @@ export const products: Product[] = [
     description:
       'Hạng mục lan can - cầu thang kính được xử lý theo tiêu chuẩn an toàn, dùng kính cường lực hoặc kính dán an toàn kết hợp trụ, pad kẹp, tay vịn hoặc hệ âm sàn.',
     image:
-      '/assets/images/lan-can-cau-thang-kinh/lan-can-kinh-ban-cong/lan-can-3.jpeg',
+      '/assets/images/lan-can-cau-thang-kinh/lan-can-kinh-ban-cong/lan-can-1.jpeg',
     overview: {
       description:
         'Lan can và cầu thang kính giúp không gian rộng hơn về thị giác, giữ ánh sáng tự nhiên và tạo đường nét kiến trúc hiện đại cho nhà phố, biệt thự, showroom.',
@@ -332,7 +389,7 @@ export const products: Product[] = [
         name: 'Lan can kính ban công',
         type: 'Ban công, sân thượng, hành lang',
         image:
-          '/assets/images/lan-can-cau-thang-kinh/lan-can-kinh-ban-cong/lan-can-3.jpeg',
+          '/assets/images/lan-can-cau-thang-kinh/lan-can-kinh-ban-cong/lan-can-1.jpeg',
       },
       {
         name: 'Cầu thang kính tay vịn',
@@ -398,7 +455,7 @@ export const products: Product[] = [
       'Cửa nhựa composite cho phòng ngủ, nhà vệ sinh và không gian nội thất cần chống ẩm, dễ vệ sinh và chi phí hợp lý.',
     description:
       'Cửa nhựa composite có khả năng chống ẩm tốt, màu sắc đa dạng và phù hợp với nhiều phong cách nội thất. Đây là lựa chọn phổ biến cho nhà ở, căn hộ và công trình hoàn thiện số lượng lớn.',
-    image: '/assets/images/cua-composite/cua-composite-1.jpeg',
+    image: '/assets/images/cua-composite/cua-composite/cua-composite-1.webp',
     overview: {
       description:
         'Cửa nhựa composite sử dụng vật liệu nhựa gỗ, phù hợp cho không gian nội thất cần chống ẩm, ổn định và đồng bộ màu sắc.',
@@ -416,7 +473,8 @@ export const products: Product[] = [
       {
         name: 'Cửa composite',
         type: 'Phòng ngủ, phòng làm việc',
-        image: '/assets/images/cua-composite/cua-composite-1.jpeg',
+        image:
+          '/assets/images/cua-composite/cua-composite/cua-composite-1.webp',
       },
       {
         name: 'Cửa composite chỉ nổi',
@@ -427,7 +485,8 @@ export const products: Product[] = [
       {
         name: 'Cửa composite ô kính',
         type: 'Nhà vệ sinh, khu phụ trợ',
-        image: '/assets/images/cua-composite/cua-composite-1.jpeg',
+        image:
+          '/assets/images/cua-composite/cua-composite-o-kinh/cua-o-kinh-1.png',
       },
     ],
     highlights: [
@@ -503,14 +562,13 @@ export const products: Product[] = [
       {
         name: 'Cửa lùa',
         type: 'Không gian hẹp, tối ưu diện tích',
-        image:
-          '/assets/images/cua-kinh-cuong-luc/cua-ban-le-san/cua-ban-le-san-1.jpeg',
+        image: '/assets/images/cua-kinh-cuong-luc/cua-lua/cua-lua-1.jpeg',
       },
       {
         name: 'Cửa 2 cánh',
         type: 'Mặt tiền rộng, sảnh vào',
         image:
-          '/assets/images/cua-kinh-cuong-luc/cua-ban-le-san/cua-ban-le-san-1.jpeg',
+          '/assets/images/cua-kinh-cuong-luc/cua-2-canh/cua-kinh-hai-canh-1.jpg',
       },
     ],
     highlights: [

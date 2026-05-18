@@ -9,6 +9,7 @@ import { siteConfig } from '@/config/site';
 import {
   createModelSlug,
   getProductModelBySlug,
+  getProductModelImages,
   products,
 } from '@/data/products';
 import { createMetadata } from '@/lib/seo';
@@ -57,13 +58,7 @@ const ProductModelPage = ({ params }: ProductModelPageProps) => {
     notFound();
   }
 
-  const galleryImages = [
-    model.image,
-    product.image,
-    ...product.models.map((item) => item.image),
-  ]
-    .filter((image, index, images) => images.indexOf(image) === index)
-    .slice(0, 8);
+  const galleryImages = getProductModelImages(model.image);
 
   const slideImages = galleryImages.map((src, index) => ({
     src,

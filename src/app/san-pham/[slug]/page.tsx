@@ -1,10 +1,16 @@
+import type { LucideIcon } from 'lucide-react';
 import {
   ArrowRight,
   BadgeCheck,
   CheckCircle2,
+  Gem,
+  Layers,
+  Maximize2,
+  Palette,
   Phone,
   Ruler,
   ShieldCheck,
+  Wrench,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,6 +34,15 @@ const specLabels = {
   accessories: 'Phụ kiện',
   colors: 'Màu sắc',
   sizes: 'Kích thước',
+};
+
+const specIcons: Record<string, LucideIcon> = {
+  material: Layers,
+  thickness: Ruler,
+  glass: Gem,
+  accessories: Wrench,
+  colors: Palette,
+  sizes: Maximize2,
 };
 
 export const generateStaticParams = () =>
@@ -168,7 +183,7 @@ const ProductDetailPage = ({ params }: ProductDetailPageProps) => {
 
       <section className="bg-silver-100 py-16 sm:py-20">
         <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             <p className="text-sm font-semibold uppercase text-champagne-500">
               Mẫu nổi bật
             </p>
@@ -248,17 +263,23 @@ const ProductDetailPage = ({ params }: ProductDetailPageProps) => {
             </h2>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {Object.entries(product.technicalSpecs).map(([key, value]) => (
-              <div key={key} className="rounded-lg border border-white/10 p-5">
-                <Ruler className="size-5 text-champagne-300" />
-                <p className="mt-4 text-sm font-semibold text-champagne-300">
-                  {specLabels[key as keyof typeof specLabels]}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-silver-200">
-                  {value}
-                </p>
-              </div>
-            ))}
+            {Object.entries(product.technicalSpecs).map(([key, value]) => {
+              const Icon = specIcons[key] ?? Ruler;
+              return (
+                <div
+                  key={key}
+                  className="rounded-lg border border-white/10 p-5"
+                >
+                  <Icon className="size-5 text-champagne-300" />
+                  <p className="mt-4 text-sm font-semibold text-champagne-300">
+                    {specLabels[key as keyof typeof specLabels]}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-silver-200">
+                    {value}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
