@@ -1,6 +1,8 @@
 import { existsSync, readdirSync } from 'fs';
 import path from 'path';
 
+import type { CategoryId } from '@/data/categories';
+
 const PUBLIC_ASSET_PREFIX = '/assets/images/';
 const PUBLIC_IMAGE_DIRECTORY = path.join(
   process.cwd(),
@@ -22,6 +24,7 @@ export type Product = {
   name: string;
   heroTitle: string;
   subtitle: string;
+  categoryId: CategoryId;
   category: string;
   excerpt: string;
   description: string;
@@ -120,6 +123,7 @@ export const products: Product[] = [
     name: 'Cửa nhôm',
     heroTitle: 'Cửa nhôm cao cấp',
     subtitle: 'Bền đẹp - cách âm - cách nhiệt - thẩm mỹ hiện đại',
+    categoryId: 'cua-nhom',
     category: 'Cửa nhôm kính',
     excerpt:
       'Cửa nhôm cho nhà ở, cửa hàng, văn phòng và công trình dân dụng với nhiều hệ nhôm, màu sắc và kiểu mở.',
@@ -202,6 +206,7 @@ export const products: Product[] = [
     name: 'Cửa cuốn',
     heroTitle: 'Cửa cuốn an toàn',
     subtitle: 'Chắc chắn - tiết kiệm diện tích - vận hành tiện lợi',
+    categoryId: 'cua-an-ninh',
     category: 'Cửa an ninh',
     excerpt:
       'Cửa cuốn khe thoáng và cửa cuốn tấm liền cho nhà ở, ki-ốt, gara và mặt bằng kinh doanh.',
@@ -277,6 +282,7 @@ export const products: Product[] = [
     name: 'Cửa thép vân gỗ',
     heroTitle: 'Cửa thép vân gỗ',
     subtitle: 'An toàn - sang trọng - bền màu - chống cong vênh',
+    categoryId: 'cua-thep',
     category: 'Cửa thép',
     excerpt:
       'Cửa thép vân gỗ cho cửa chính, cửa thông phòng và cửa căn hộ, kết hợp độ bền kim loại với bề mặt giả gỗ sang trọng.',
@@ -364,6 +370,7 @@ export const products: Product[] = [
     name: 'Lan can - cầu thang kính',
     heroTitle: 'Lan can - cầu thang kính',
     subtitle: 'Thông thoáng - an toàn - hiện đại - nâng tầm không gian',
+    categoryId: 'kinh-lan-can',
     category: 'Kính an toàn',
     excerpt:
       'Lan can kính, cầu thang kính cho nhà phố, biệt thự và công trình thương mại cần không gian sáng, thoáng và hiện đại.',
@@ -450,6 +457,7 @@ export const products: Product[] = [
     name: 'Cửa nhựa composite',
     heroTitle: 'Cửa nhựa composite',
     subtitle: 'Chống ẩm - bền đẹp - nhẹ êm - phù hợp nội thất',
+    categoryId: 'cua-noi-that',
     category: 'Cửa nội thất',
     excerpt:
       'Cửa nhựa composite cho phòng ngủ, nhà vệ sinh và không gian nội thất cần chống ẩm, dễ vệ sinh và chi phí hợp lý.',
@@ -532,6 +540,7 @@ export const products: Product[] = [
     name: 'Cửa kính cường lực',
     heroTitle: 'Cửa kính cường lực',
     subtitle: 'Sang trọng - sáng thoáng - an toàn - tối ưu mặt tiền',
+    categoryId: 'cua-kinh',
     category: 'Cửa kính',
     excerpt:
       'Cửa kính cường lực cho showroom, văn phòng, cửa hàng và nhà ở cần không gian mở, sáng và sang trọng.',

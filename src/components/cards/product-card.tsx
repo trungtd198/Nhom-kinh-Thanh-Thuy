@@ -2,7 +2,7 @@ import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { Product } from '@/data/products';
+import type { Product } from '@/features/products/product.types';
 
 type ProductCardProps = {
   product: Product;

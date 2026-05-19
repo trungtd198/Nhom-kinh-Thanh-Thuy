@@ -36,3 +36,6 @@ local
 
 # env
 .env.local
+
+# docs
+admin-product-update-plan.md

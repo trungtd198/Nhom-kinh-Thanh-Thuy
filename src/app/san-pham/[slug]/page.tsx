@@ -19,13 +19,18 @@ import { notFound } from 'next/navigation';
 import { FAQAccordion } from '@/components/sections/faq-accordion';
 import { Button } from '@/components/ui/button';
 import { siteConfig } from '@/config/site';
-import { createModelSlug, getProductBySlug, products } from '@/data/products';
+import {
+  getProductBySlug,
+  getProducts,
+} from '@/features/products/product.repository';
 import { createMetadata } from '@/lib/seo';
 import { formatPhoneHref } from '@/lib/utils';
 
 type ProductDetailPageProps = {
   params: { slug: string };
 };
+
+export const revalidate = 60;
 
 const specLabels = {
   material: 'Chất liệu',
@@ -45,11 +50,14 @@ const specIcons: Record<string, LucideIcon> = {
   sizes: Maximize2,
 };
 
-export const generateStaticParams = () =>
-  products.map((product) => ({ slug: product.slug }));
+export const generateStaticParams = async () => {
+  const products = await getProducts();
 
-export const generateMetadata = ({ params }: ProductDetailPageProps) => {
-  const product = getProductBySlug(params.slug);
+  return products.map((product) => ({ slug: product.slug }));
+};
+
+export const generateMetadata = async ({ params }: ProductDetailPageProps) => {
+  const product = await getProductBySlug(params.slug);
 
   if (!product) {
     return createMetadata({ title: 'Sản phẩm' });
@@ -63,8 +71,8 @@ export const generateMetadata = ({ params }: ProductDetailPageProps) => {
   });
 };
 
-const ProductDetailPage = ({ params }: ProductDetailPageProps) => {
-  const product = getProductBySlug(params.slug);
+const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
+  const product = await getProductBySlug(params.slug);
 
   if (!product) {
     notFound();
@@ -195,7 +203,7 @@ const ProductDetailPage = ({ params }: ProductDetailPageProps) => {
             {product.models.map((model) => (
               <Link
                 key={model.name}
-                href={`/san-pham/${product.slug}/${createModelSlug(model.name)}`}
+                href={`/san-pham/${product.slug}/${model.slug}`}
                 className="group overflow-hidden rounded-lg bg-white shadow-sm"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">

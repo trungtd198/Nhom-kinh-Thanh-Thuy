@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum AdminRole {
+  ADMIN
+  EDITOR
+}
+
+model CategoryGroup {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  description String
+  sortOrder   Int        @default(0)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  categories  Category[]
+
+  @@map("category_groups")
+}
+
+model Category {
+  id          String        @id @default(cuid())
+  groupId     String
+  slug        String        @unique
+  name        String
+  description String?
+  sortOrder   Int           @default(0)
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  group       CategoryGroup @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  products    Product[]
+
+  @@index([groupId])
+  @@map("categories")
+}
+
+model Product {
+  id                     String           @id @default(cuid())
+  categoryId             String
+  slug                   String           @unique
+  name                   String
+  heroTitle              String
+  subtitle               String?
+  excerpt                String
+  description            String
+  coverImageUrl          String?
+  overviewDescription    String?
+  overviewValue          String?
+  overviewTargetUsers    String?
+  overviewReasons        Json?
+  highlights             Json?
+  advantages             Json?
+  applications           Json?
+  technicalSpecs         Json?
+  priceNote              String?
+  status                 ProductStatus    @default(DRAFT)
+  sortOrder              Int              @default(0)
+  seoTitle               String?
+  seoDescription         String?
+  seoImageUrl            String?
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+  publishedAt            DateTime?
+  category               Category         @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  models                 ProductModel[]
+  images                 ProductImage[]
+  specs                  ProductSpec[]
+  pricing                ProductPricing[]
+  faqs                   ProductFaq[]
+
+  @@index([categoryId])
+  @@index([status, sortOrder])
+  @@map("products")
+}
+
+model ProductModel {
+  id            String         @id @default(cuid())
+  productId     String
+  slug          String
+  name          String
+  type          String
+  description   String?
+  coverImageUrl String?
+  sortOrder     Int            @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  product       Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  images        ProductImage[]
+
+  @@unique([productId, slug])
+  @@index([productId])
+  @@map("product_models")
+}
+
+model ProductImage {
+  id          String        @id @default(cuid())
+  productId   String
+  modelId     String?
+  storagePath String?
+  publicUrl   String
+  alt         String?
+  caption     String?
+  sortOrder   Int           @default(0)
+  isCover     Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  product     Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  model       ProductModel? @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([modelId])
+  @@map("product_images")
+}
+
+model ProductSpec {
+  id        String  @id @default(cuid())
+  productId String
+  label     String
+  value     String
+  sortOrder Int     @default(0)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_specs")
+}
+
+model ProductPricing {
+  id        String  @id @default(cuid())
+  productId String
+  type      String
+  price     String
+  sortOrder Int     @default(0)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_pricing")
+}
+
+model ProductFaq {
+  id        String  @id @default(cuid())
+  productId String
+  question  String
+  answer    String
+  sortOrder Int     @default(0)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_faqs")
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         AdminRole @default(EDITOR)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  lastLoginAt  DateTime?
+
+  @@map("admin_users")
+}

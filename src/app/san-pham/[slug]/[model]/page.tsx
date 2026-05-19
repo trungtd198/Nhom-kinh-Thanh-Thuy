@@ -7,17 +7,18 @@ import { Button } from '@/components/ui/button';
 import { ImageSlider } from '@/components/ui/image-slider';
 import { siteConfig } from '@/config/site';
 import {
-  createModelSlug,
   getProductModelBySlug,
   getProductModelImages,
-  products,
-} from '@/data/products';
+  getProducts,
+} from '@/features/products/product.repository';
 import { createMetadata } from '@/lib/seo';
 import { formatPhoneHref } from '@/lib/utils';
 
 type ProductModelPageProps = {
   params: { slug: string; model: string };
 };
+
+export const revalidate = 60;
 
 const specLabels = {
   material: 'Chất liệu',
@@ -28,16 +29,22 @@ const specLabels = {
   sizes: 'Kích thước',
 };
 
-export const generateStaticParams = () =>
-  products.flatMap((product) =>
+export const generateStaticParams = async () => {
+  const products = await getProducts();
+
+  return products.flatMap((product) =>
     product.models.map((model) => ({
       slug: product.slug,
-      model: createModelSlug(model.name),
+      model: model.slug,
     })),
   );
+};
 
-export const generateMetadata = ({ params }: ProductModelPageProps) => {
-  const { product, model } = getProductModelBySlug(params.slug, params.model);
+export const generateMetadata = async ({ params }: ProductModelPageProps) => {
+  const { product, model } = await getProductModelBySlug(
+    params.slug,
+    params.model,
+  );
 
   if (!product || !model) {
     return createMetadata({ title: 'Chi tiết sản phẩm' });
@@ -46,19 +53,22 @@ export const generateMetadata = ({ params }: ProductModelPageProps) => {
   return createMetadata({
     title: model.name,
     description: `${model.name} - ${model.type}. ${product.excerpt}`,
-    path: `/san-pham/${product.slug}/${createModelSlug(model.name)}`,
+    path: `/san-pham/${product.slug}/${model.slug}`,
     image: model.image,
   });
 };
 
-const ProductModelPage = ({ params }: ProductModelPageProps) => {
-  const { product, model } = getProductModelBySlug(params.slug, params.model);
+const ProductModelPage = async ({ params }: ProductModelPageProps) => {
+  const { product, model } = await getProductModelBySlug(
+    params.slug,
+    params.model,
+  );
 
   if (!product || !model) {
     notFound();
   }
 
-  const galleryImages = getProductModelImages(model.image);
+  const galleryImages = getProductModelImages(model);
 
   const slideImages = galleryImages.map((src, index) => ({
     src,

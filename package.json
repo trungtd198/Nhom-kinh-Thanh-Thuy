@@ -8,6 +8,10 @@
     "build-stats": "cross-env ANALYZE=true npm run build",
     "build-prod": "run-s clean build",
     "clean": "rimraf .next .swc out",
+    "db:generate": "node scripts/load-env.mjs prisma generate",
+    "db:migrate": "node scripts/load-env.mjs prisma migrate dev",
+    "db:seed": "node scripts/load-env.mjs tsx prisma/seed.ts",
+    "admin:create": "node scripts/load-env.mjs tsx scripts/create-admin.ts",
     "lint": "next lint",
     "type-check": "tsc --noEmit --pretty",
     "format": "next lint --fix && prettier '**/*.{json,yaml}' --write --ignore-path .gitignore",
@@ -16,8 +20,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.28.6",
+    "@prisma/client": "^6.16.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/supabase-js": "^2.106.0",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
@@ -58,8 +64,10 @@
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.33",
     "prettier": "^3.2.4",
+    "prisma": "^6.16.2",
     "rimraf": "^5.0.5",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.22.2",
     "typescript": "^5.3.3"
   },
   "license": "ISC"

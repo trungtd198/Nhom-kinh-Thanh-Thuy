@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 import { siteConfig } from '@/config/site';
 import { posts } from '@/data/posts';
-import { products } from '@/data/products';
+import { getProducts } from '@/features/products/product.repository';
 
 const staticRoutes = [
   '',
@@ -13,8 +13,9 @@ const staticRoutes = [
   '/lien-he',
 ];
 
-const sitemap = (): MetadataRoute.Sitemap => {
+const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const now = new Date();
+  const products = await getProducts();
 
   return [
     ...staticRoutes.map((route) => ({

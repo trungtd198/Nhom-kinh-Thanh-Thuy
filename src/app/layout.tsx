@@ -3,9 +3,7 @@ import '@/styles/global.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
-import { FloatingCTA } from '@/components/layout/floating-cta';
-import { SiteFooter } from '@/components/layout/site-footer';
-import { SiteHeader } from '@/components/layout/site-header';
+import { PublicShell } from '@/components/layout/public-shell';
 import { siteConfig } from '@/config/site';
 import { createMetadata } from '@/lib/seo';
 
@@ -29,10 +27,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="vi">
       <body className="bg-white text-navy-950 antialiased">
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
-        <FloatingCTA />
+        <PublicShell>{children}</PublicShell>
         <script
           type="application/ld+json"
           suppressHydrationWarning
