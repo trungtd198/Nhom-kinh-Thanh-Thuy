@@ -35,7 +35,12 @@ local
 .vercel
 
 # env
+.env
 .env.local
+.env.local.example
+
+# Prisma generated client (optional - some teams commit this)
+# prisma/generated
 
 # docs
 admin-product-update-plan.md
