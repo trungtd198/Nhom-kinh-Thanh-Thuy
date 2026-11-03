@@ -42,6 +42,7 @@
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-class-static-block": "^7.29.7",
     "@next/bundle-analyzer": "^14.1.0",
     "@types/node": "^20.11.10",
     "@types/react": "^18.2.48",
